@@ -28469,7 +28469,7 @@ div.tagsinput span.tag a {
   font-family: "Nunito", sans-serif;
   font-weight: 500;
   padding: 0;
-  width: 235px;
+  width: 270px;
   z-index: 11;
   transition: width 0.25s ease, background 0.25s ease;
   -webkit-transition: width 0.25s ease, background 0.25s ease;
@@ -29887,7 +29887,7 @@ div.tagsinput span.tag a {
 /* Layouts */
 @media (min-width: 992px) {
   .sidebar-mini .navbar .navbar-brand-wrapper {
-    width: 185px;
+    width: 85px;
   }
   .sidebar-mini .navbar .navbar-menu-wrapper {
     width: calc(100% - 185px);
