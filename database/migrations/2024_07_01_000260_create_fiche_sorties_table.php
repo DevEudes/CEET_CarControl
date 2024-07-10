@@ -33,8 +33,11 @@ return new class extends Migration
             $table->foreignId('id_vehicule')->constrained(table: 'vehicules');
             $table->foreignId('id_user')->constrained(table: 'users');
             $table->foreignId('id_departement')->constrained(table: 'departements');
-            $table->timestamps();        
+            $table->timestamps(); 
+                   
             $table->softDeletes();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
         });
     }
 

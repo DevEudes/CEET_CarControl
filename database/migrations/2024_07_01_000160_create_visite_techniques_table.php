@@ -18,11 +18,12 @@ return new class extends Migration
             $table->date('date_debut');
             $table->date('date_expiration');
             $table->string('image');
-            $table->foreignId('id_etablissement')->constrained(table: 'etablissements');
             $table->foreignId('id_vehicule')->constrained(table: 'vehicules');
             $table->timestamps();
             
             $table->softDeletes();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
         });
     }
 

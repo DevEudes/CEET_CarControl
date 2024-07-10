@@ -23,6 +23,8 @@ return new class extends Migration
             $table->timestamps();
             
             $table->softDeletes();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -30,6 +32,8 @@ return new class extends Migration
             $table->string('token');
             $table->timestamp('created_at')->nullable();
             $table->softDeletes();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
         });
 
         Schema::create('sessions', function (Blueprint $table) {
@@ -40,6 +44,8 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
             $table->softDeletes();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
         });
     }
 

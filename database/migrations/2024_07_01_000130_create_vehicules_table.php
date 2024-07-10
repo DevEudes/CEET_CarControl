@@ -25,11 +25,13 @@ return new class extends Migration
             $table->date('validite_garantie')->nullable();
             $table->integer('index');
             $table->string('liste_outillage');
-            $table->enum('etat_vehicule', ['neuf', 'bon_etat', 'en_maintenance', 'etat_passable', 'mauvais_etat', 'rebut']);
+            $table->enum('etat_vehicule', ['neuf', 'bon_etat', 'indisponible', 'en_maintenance', 'etat_passable', 'mauvais_etat', 'rebut'])->default('neuf');
             $table->foreignId('id_genre_vehicule')->constrained(table: 'genre_vehicules');
             $table->timestamps();
             
             $table->softDeletes();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
         });
     }
 
