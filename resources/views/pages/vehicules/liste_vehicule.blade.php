@@ -1,5 +1,4 @@
-@extends ('layouts/base')
-<!-- @section('vehicule', 'vehicule') -->
+@extends ('layouts.base')
 @section('title')
 <div class="col-12 col-xl-8 mb-4 mb-xl-0 mx-auto">
     <div class="d-flex align-items-center justify-content-center">
@@ -16,30 +15,34 @@
 
 @section('content')
 <div class="row">
-        <div class="col-md-12 grid-margin stretch-card"> <!-- Changer col-md-7 à col-md-12 pour plus de largeur -->
-            <div class="card" style="width: 100%;"> <!-- Définir la largeur de la card à 100% -->
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card" style="width: 100%;">
                 <div class="card-body">
-                    <p class="card-title mb-0">Tous les véhicules du parc</p>
+                    <p class="card-title mb-0">Tous les véhicules</p>
                     <div class="table-responsive">
-                        <table class="table table-striped table-borderless" style="width: 100%;"> <!-- Définir la largeur de la table à 100% -->
+                        <table class="table table-striped table-borderless" style="width: 100%;"> 
                             <thead>
                                 <tr>
                                     <th>Véhicule</th>
                                     <th>Immatriculation</th>
                                     <th>Genre</th>
                                     <th>Index du compteur</th>
+                                    <th>Affection</th>
                                     <th>Statut</th>
                                 </tr>  
                             </thead>
                             <tbody>
+                                @foreach($affectations as $affectation)
                                 <tr>
-                                    <td>Nissan Navara</td>
-                                    <td class="font-weight-bold">TG 5345</td>
-                                    <td>Camionnette</td>
-                                    <td>4740 km</td>
-                                    <td class="font-weight-medium"><div class="badge badge-success">En mission</div></td>
+                                    <td>{{$affectation->vehicule->marque}}</td>
+                                    <td class="font-weight-bold">{{$affectation->vehicule->immatriculation}}</td>
+                                    <td>{{$affectation->vehicule->genre_vehicule->libelle}}</td>
+                                    <td>{{$affectation->vehicule->index}} km</td>
+                                    <td>{{$affectation->departement->nom}} </td>
+                                    <td class="font-weight-medium"><div class="badge badge-success">{{$affectation->vehicule->etat_vehicule}}</div></td>
                                 </tr>
-                            </tbody>
+                                @endforeach
+                                </tbody>
                         </table>
                     </div>
                 </div>

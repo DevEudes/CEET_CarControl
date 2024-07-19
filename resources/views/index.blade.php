@@ -76,13 +76,15 @@
                                 </tr>  
                             </thead>
                             <tbody>
+                                @foreach($vehicules_parc_auto as $vehicule)
                                 <tr>
-                                    <td>Nissan Navara</td>
-                                    <td class="font-weight-bold">TG 5345</td>
-                                    <td>Camionnette</td>
-                                    <td>4740 km</td>
+                                    <td>{{$vehicule->marque}}</td>
+                                    <td class="font-weight-bold">{{$vehicule->immatriculation}}</td>
+                                    <td>{{$vehicule->genre_vehicule->libelle}}</td>
+                                    <td>{{$vehicule->index}} km</td>
                                     <td class="font-weight-medium"><div class="badge badge-success">En mission</div></td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

@@ -13781,11 +13781,12 @@ input[type="button"].btn-block {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: transparent;
+  background-color: #f9f7ed;
   border-radius: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   margin: 10px auto; /* Centrer horizontalement */
-  width: 700px; /* Assurez-vous qu'elle utilise toute la largeur disponible */
+  width: 600px;
+  height: 70px;
   overflow: hidden; /* Assurez-vous que les éléments enfants restent à l'intérieur des bordures */
 }
 
@@ -13832,6 +13833,9 @@ input[type="button"].btn-block {
   flex: 1 1 auto;
   min-height: 1px;
   padding: 1.25rem;
+  padding-bottom: 12em;
+  padding-top: 1em;
+  padding-left: 1em;
 }
 
 .card-title {
@@ -28494,13 +28498,13 @@ div.tagsinput span.tag a {
   font-family: "Nunito", sans-serif;
   font-weight: 500;
   padding: 0;
-  width: 300px;
+  width: 18em;
   z-index: 11;
   transition: width 0.25s ease, background 0.25s ease;
   -webkit-transition: width 0.25s ease, background 0.25s ease;
   -moz-transition: width 0.25s ease, background 0.25s ease;
   -ms-transition: width 0.25s ease, background 0.25s ease;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar .nav {
@@ -29126,9 +29130,9 @@ div.tagsinput span.tag a {
   -webkit-transition: width 0.25s ease, background 0.25s ease;
   -moz-transition: width 0.25s ease, background 0.25s ease;
   -ms-transition: width 0.25s ease, background 0.25s ease;
-  width: 18em;
+  width: 17.5em;
   height: 60px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-dark .navbar .navbar-brand-wrapper {
@@ -29177,9 +29181,10 @@ div.tagsinput span.tag a {
   color: #6C7383;
   padding-right: 2.375rem;
   padding-left: 2.375rem;
-  width: calc(100% - 18em);
+  width: calc(100% - 17.5em);
   height: 60px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0.5, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
 }
 
 @media (max-width: 991px) {
@@ -30926,4 +30931,27 @@ div.tagsinput span.tag a {
   }
 }
 
+.bg-crimson {
+  background-color: #ef1212;
+}
+
+.border-crimson {
+  border-color: #ef1212;
+}
+
+.text-crimson {
+  color: #ef1212;
+}
+
+.focus\:border-crimson:focus {
+  border-color: #ef1212;
+}
+
+.focus\:ring-crimson:focus {
+  --tw-ring-color: #ef1212;
+}
+
+.bg-merino {
+  background-color: #f9f7ed;
+}
 /*# sourceMappingURL=../maps/vertical-layout-light/style.css.map */

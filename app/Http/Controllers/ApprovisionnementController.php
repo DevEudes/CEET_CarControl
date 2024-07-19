@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Approvisionnement;
+use App\Models\Chauffeur;
+use App\Models\Vehicule;
 use Illuminate\Http\Request;
 
 class ApprovisionnementController extends Controller
@@ -11,7 +14,8 @@ class ApprovisionnementController extends Controller
      */
     public function index()
     {
-        return view('pages.approvisionnements.liste_fiche_appvnmt');
+        $appvnmts = Approvisionnement::all();
+        return view('pages.approvisionnements.liste_fiche_appvnmt', compact('appvnmts'));
 
     }
 
@@ -20,7 +24,10 @@ class ApprovisionnementController extends Controller
      */
     public function create()
     {
-        return view('pages.approvisionnements.ajouter_fiche_appvnmt');
+        $vehicules = Vehicule::all();
+        $typeAppvnmts = Approvisionnement::all();
+        $chauffeurs = Chauffeur::all();
+        return view('pages.approvisionnements.ajouter_fiche_appvnmt', compact('vehicules', 'typeAppvnmts', 'chauffeurs'));
     }
 
     /**

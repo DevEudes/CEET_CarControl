@@ -1,4 +1,4 @@
-@extends ('layouts/base')
+@extends ('layouts.base')
 @section('title')
 <div class="col-12 col-xl-8 mb-4 mb-xl-0 mx-auto">
     <div class="d-flex align-items-center justify-content-center">

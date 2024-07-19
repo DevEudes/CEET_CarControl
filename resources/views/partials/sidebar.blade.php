@@ -6,20 +6,27 @@
                 <span class="menu-title">Gestionnaire des fiches</span>
             </a>
         </li>
+
+        @can('view-vehicles')
         <li class="nav-item" id="vehicule">
             <a class="nav-link" data-toggle="collapse" href="#vehiculeMenu" aria-expanded="false">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
-                <i class="mdi mdi-car" style=""></i>
+                <i class="mdi mdi-car"></i>
                 <span class="menu-title">&nbsp;&nbsp;&nbsp;&nbsp;Véhicules</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="vehiculeMenu">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('vehicules.index') }}"> Inventaire des véhicules </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('vehicules.list') }}"> Inventaire des véhicules </a></li>
+                    @can('manage-vehicles')
                     <li class="nav-item"> <a class="nav-link" href="{{ route('vehicules.create') }}"> Ajouter un véhicule </a></li>
+                    @endcan
                 </ul>
             </div>
         </li>
+        @endcan
+
+        @can('view-sorties')
         <li class="nav-item" id="sortie">
             <a class="nav-link" data-toggle="collapse" href="#fiche_sortie" aria-expanded="false">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        
@@ -33,7 +40,10 @@
                     <li class="nav-item"> <a class="nav-link" href="{{ route('sorties.create') }}">Ajouter</a></li>
                 </ul>
             </div>
-        </li> 
+        </li>
+        @endcan
+
+        @can('view-approvisionnements')
         <li class="nav-item" id="appvnmt">
             <a class="nav-link" data-toggle="collapse" href="#fiche_appvnmt" aria-expanded="false">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        
@@ -48,6 +58,9 @@
                 </ul>
             </div>
         </li>
+        @endcan
+
+        @can('view-maintenances')
         <li class="nav-item" id="maintenance">
             <a class="nav-link" data-toggle="collapse" href="#fiche_maintenance" aria-expanded="false">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        
@@ -62,6 +75,9 @@
                 </ul>
             </div>
         </li>
+        @endcan
+
+        @can('view-magasins')
         <li class="nav-item" id="magasin">
             <a class="nav-link" data-toggle="collapse" href="#fiche_magasin" aria-expanded="false">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        
@@ -76,6 +92,9 @@
                 </ul>
             </div>
         </li>
+        @endcan
+
+        @can('view-achats')
         <li class="nav-item" id="achat">
             <a class="nav-link" data-toggle="collapse" href="#demande_achat" aria-expanded="false">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        
@@ -90,6 +109,9 @@
                 </ul>
             </div>
         </li>
+        @endcan
+
+        @can('view-affectations')
         <li class="nav-item" id="affectation">
             <a class="nav-link" data-toggle="collapse" href="#aut" aria-expanded="false">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        
@@ -104,6 +126,8 @@
                 </ul>
             </div>
         </li>
+        @endcan
+
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        
@@ -120,16 +144,24 @@
         </li>
         <li class="nav-item" id="document">
             <a class="nav-link" data-toggle="collapse" href="#documents" aria-expanded="false">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        
-            <i class="icon-paper menu-icon"></i>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        
+                <i class="icon-paper menu-icon"></i>
                 <span class="menu-title">Documents</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="documents">
                 <ul class="nav flex-column sub-menu">
+                    @can('view-assurances')
                     <li class="nav-item"> <a class="nav-link" href="{{ route('assurances.index') }}"> Assurance </a></li>
+                    @endcan
+
+                    @can('view-visite-techniques')
                     <li class="nav-item"> <a class="nav-link" href="{{ route('visiteTechniques.index') }}"> Visite technique </a></li>
+                    @endcan
+
+                    @can('view-tvms')
                     <li class="nav-item"> <a class="nav-link" href="{{ route('tvms.index') }}"> TVM </a></li>
+                    @endcan
                 </ul>
             </div>
         </li>

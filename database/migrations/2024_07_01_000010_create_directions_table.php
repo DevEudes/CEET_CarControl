@@ -16,12 +16,12 @@ return new class extends Migration
             $table->string('nom');
             $table->string('libelle');
             $table->integer('code_geographique');
-            $table->foreignId('id_parent')->constrained(table: 'directions');
+            $table->foreignId('id_parent')->nullable()->constrained('directions');
             $table->timestamps();
             
             $table->softDeletes();
             $table->unsignedBigInteger('created_by')->nullable();
-            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();  
         });
     }
 

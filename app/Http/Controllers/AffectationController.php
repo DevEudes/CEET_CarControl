@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Affectation;
+use App\Models\Departement;
+use App\Models\Vehicule;
 use Illuminate\Http\Request;
 
 class AffectationController extends Controller
@@ -11,7 +14,8 @@ class AffectationController extends Controller
      */
     public function index()
     {
-        return view('pages.affectations.liste_affectation');
+        $affectations = Affectation::orderBy('date_affectation', 'desc')->get();
+        return view('pages.affectations.liste_affectation', compact('affectations'));
     }
 
     /**
@@ -19,7 +23,9 @@ class AffectationController extends Controller
      */
     public function create()
     {
-        return view('pages.affectations.ajouter_affectation');
+        $vehicules = Vehicule::orderBy('id', 'asc')->get();
+        $departements = Departement::orderBy('id', 'asc')->get();
+        return view('pages.affectations.ajouter_affectation', compact('vehicules', 'departements'));
     }
 
     /**

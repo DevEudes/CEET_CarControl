@@ -28,7 +28,6 @@
 
         <div class="container-fluid page-body-wrapper">
             @include('partials.sidebar')
-
             <div class="main-panel">
                 <div class="content-wrapper">
                     @include('partials.header')    
@@ -38,7 +37,7 @@
             </div>
         </div>
     </div>
-
+    
     <!-- plugins:js -->
     <script src="{{ url('vendors/js/vendor.bundle.base.js') }}"></script>
     <!-- endinject -->
