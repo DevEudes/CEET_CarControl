@@ -68,11 +68,11 @@
             </li>
         </ul>
         <ul>
-            <li>
+            <li class="nav-item nav-search d-none d-lg-block" style="color: #000; margin-top: 20px">
                 @if (Route::has('login'))
                     @auth
                         @role('admin|chef_service')
-                            <a href="{{ url('/dashboard') }}" class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20]">
+                            <a href="{{ url('/dashboard') }}" class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20]" >
                                 Tableau de bord
                             </a>
                         @endrole
@@ -83,16 +83,6 @@
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                             @csrf
                         </form>
-                    @else
-                        <a href="{{ route('login') }}" class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20]">
-                            Connexion
-                        </a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20]">
-                                Inscription
-                            </a>
-                        @endif
                     @endauth
                 @endif
             </li>

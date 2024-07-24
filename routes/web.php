@@ -11,6 +11,7 @@ use App\Http\Controllers\PieceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SortieController;
 use App\Http\Controllers\TvmController;
+use App\Http\Controllers\UtilisateurController;
 use App\Http\Controllers\VehiculeController;
 use App\Http\Controllers\VisiteTechniqueController;
 use Illuminate\Support\Facades\Gate;
@@ -96,3 +97,6 @@ Route::middleware(['auth', 'can:view-visite-techniques'])->group(function () {
 Route::middleware(['auth', 'can:view-assurances'])->group(function () {
     Route::resource('assurances', AssuranceController::class);
 });
+
+// Routes pour les utilisateurs avec les permissions
+Route::resource('utilisateurs', UtilisateurController::class);

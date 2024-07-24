@@ -1,17 +1,19 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
+    @section('title')
+        <div class="col-12 col-xl-8 mb-4 mb-xl-0 mx-auto">
+            <div class="d-flex align-items-center justify-content-center">
+                <h2 class="header-text">
+                <i class="icon-grid menu-icon" style="color: #6C7383; width: 70px;"></i>
+                </h2>
+                <h2 class="header-text" style="font-size: 1.5rem; color: #ef1212;">
+                    &nbsp;&nbsp; TABLEAU DE BORD
+                </h2>
             </div>
         </div>
+    @endsection
+    
+
+    <div class="py-12">
+        @yield('dashboard_container')
     </div>
 </x-app-layout>

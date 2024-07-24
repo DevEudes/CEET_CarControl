@@ -3,34 +3,40 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <title>CarControl-Tableau de bord</title>
+        <link rel="shortcut icon" href="{{ url('images/ceet_logo.png') }}" />
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="{{ url('vendors/ti-icons/css/themify-icons.css') }}">
+        <link rel="stylesheet" href="{{ url('vendors/feather/feather.css') }}">
+        <link rel="stylesheet" href="{{ url('vendors/mdi/css/materialdesignicons.min.css') }}">
+        
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <!-- inject:css -->
+        <link rel="stylesheet" href="{{ url('css/vertical-layout-light/style.css') }}">
+        <!-- endinject -->
+
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+    <body>
+        <div class="container-scroller">
             @include('layouts.navigation')
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
+            <div class="container-fluid page-body-wrapper">
+                @include('layouts.sidebar')
+                <div class="main-panel">
+                    <div class="content-wrapper">
+                        @include('partials.header')    
+                        <main>
+                            {{ $slot }}
+                        </main>
+                        @include('partials.footer')
                     </div>
-                </header>
-            @endisset
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
+                </div>
+            </div>
+        </div>        
     </body>
 </html>
