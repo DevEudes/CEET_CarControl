@@ -32,5 +32,4 @@ class Cache extends Model
 		'value',
 		'expiration'
 	];
-	
 }

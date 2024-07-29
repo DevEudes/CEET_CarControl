@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('departements', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->string('libelle');
-            $table->string('code_centre_de_responsabilite_');
+            $table->string('code_centre_de_responsabilite')->unique();
             $table->foreignId('id_direction')->constrained(table: 'directions');
             $table->timestamps();
             

@@ -51,7 +51,7 @@
                 <select id="id_profil" name="id_profil" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" required>
                     <option value="" class="bg-merino text-gray-500">{{ __('Selectionnez votre profil') }}</option>
                     @foreach ($profils as $profil)
-                        <option value="{{ $profil->id }}" class="bg-merino text-gray-900">{{ $profil->libelle }}</option>
+                        <option value="{{ $profil->id }}" class="bg-merino text-gray-900">{{ $profil->nom }}</option>
                     @endforeach
                 </select>
                 <x-input-error :messages="$errors->get('id_profil')" class="mt-2" />

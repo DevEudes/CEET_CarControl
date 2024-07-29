@@ -68,10 +68,11 @@
                         <table class="table table-striped table-borderless" style="width: 100%;"> <!-- Définir la largeur de la table à 100% -->
                             <thead>
                                 <tr>
-                                    <th>Véhicule</th>
+                                    <th>Marque</th>
+                                    <th>Modèle</th>
                                     <th>Immatriculation</th>
                                     <th>Genre</th>
-                                    <th>Index du compteur</th>
+                                    <th>Kilometrage</th>
                                     <th>Statut</th>
                                 </tr>  
                             </thead>
@@ -79,10 +80,11 @@
                                 @foreach($vehicules_parc_auto as $vehicule)
                                 <tr>
                                     <td>{{$vehicule->marque}}</td>
+                                    <td>{{$vehicule->modele}}</td>
                                     <td class="font-weight-bold">{{$vehicule->immatriculation}}</td>
-                                    <td>{{$vehicule->genre_vehicule->libelle}}</td>
-                                    <td>{{$vehicule->index}} km</td>
-                                    <td class="font-weight-medium"><div class="badge badge-success">En mission</div></td>
+                                    <td>{{$vehicule->genre_vehicule->nom}}</td>
+                                    <td>{{$vehicule->kilometrage}} km</td>
+                                    <td class="font-weight-medium"><div class="badge badge-success">{{ $vehicule->etat_vehicule }}</div></td>
                                 </tr>
                                 @endforeach
                             </tbody>

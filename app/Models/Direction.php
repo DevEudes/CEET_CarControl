@@ -16,16 +16,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * 
  * @property int $id
  * @property string $nom
- * @property string $libelle
  * @property int $code_geographique
- * @property int $id_parent
+ * @property int|null $id_parent
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
  * @property int|null $created_by
  * @property int|null $updated_by
  * 
- * @property Direction $direction
+ * @property Direction|null $direction
  * @property Collection|Departement[] $departements
  * @property Collection|Direction[] $directions
  *
@@ -45,7 +44,6 @@ class Direction extends Model
 
 	protected $fillable = [
 		'nom',
-		'libelle',
 		'code_geographique',
 		'id_parent',
 		'created_by',
@@ -66,22 +64,4 @@ class Direction extends Model
 	{
 		return $this->hasMany(Direction::class, 'id_parent');
 	}
-
-	protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            if (auth()->check()) {
-                $model->created_by = auth()->id();
-                $model->updated_by = auth()->id();
-            }
-        });
-
-        static::updating(function ($model) {
-            if (auth()->check()) {
-                $model->updated_by = auth()->id();
-            }
-        });
-    }
 }

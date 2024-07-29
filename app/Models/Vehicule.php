@@ -15,26 +15,27 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * Class Vehicule
  * 
  * @property int $id
- * @property string $code
  * @property string $immatriculation
  * @property string $marque
  * @property string $modele
  * @property string $numero_moteur
  * @property string $numero_chassis
- * @property Carbon $date_obtention
+ * @property Carbon $date_achat
  * @property int $numero_carte_grise
  * @property string $image_carte_grise
  * @property Carbon|null $validite_garantie
- * @property int $index
+ * @property int $kilometrage
  * @property string $liste_outillage
  * @property string $etat_vehicule
  * @property int $id_genre_vehicule
+ * @property int $id_fournisseur
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
  * @property int|null $created_by
  * @property int|null $updated_by
  * 
+ * @property Fournisseur $fournisseur
  * @property GenreVehicule $genre_vehicule
  * @property Collection|Affectation[] $affectations
  * @property Collection|Approvisionnement[] $approvisionnements
@@ -53,33 +54,39 @@ class Vehicule extends Model
 	protected $table = 'vehicules';
 
 	protected $casts = [
-		'date_obtention' => 'datetime',
+		'date_achat' => 'datetime',
 		'numero_carte_grise' => 'int',
 		'validite_garantie' => 'datetime',
-		'index' => 'int',
+		'kilometrage' => 'int',
 		'id_genre_vehicule' => 'int',
+		'id_fournisseur' => 'int',
 		'created_by' => 'int',
 		'updated_by' => 'int'
 	];
 
 	protected $fillable = [
-		'code',
 		'immatriculation',
 		'marque',
 		'modele',
 		'numero_moteur',
 		'numero_chassis',
-		'date_obtention',
+		'date_achat',
 		'numero_carte_grise',
 		'image_carte_grise',
 		'validite_garantie',
-		'index',
+		'kilometrage',
 		'liste_outillage',
 		'etat_vehicule',
 		'id_genre_vehicule',
+		'id_fournisseur',
 		'created_by',
 		'updated_by'
 	];
+
+	public function fournisseur()
+	{
+		return $this->belongsTo(Fournisseur::class, 'id_fournisseur');
+	}
 
 	public function genre_vehicule()
 	{
@@ -125,22 +132,4 @@ class Vehicule extends Model
 	{
 		return $this->hasMany(VisiteTechnique::class, 'id_vehicule');
 	}
-
-	protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            if (auth()->check()) {
-                $model->created_by = auth()->id();
-                $model->updated_by = auth()->id();
-            }
-        });
-
-        static::updating(function ($model) {
-            if (auth()->check()) {
-                $model->updated_by = auth()->id();
-            }
-        });
-    }
 }

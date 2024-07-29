@@ -17,8 +17,10 @@ return new class extends Migration
             $table->string('nom');
             $table->string('prenom');
             $table->string('email')->unique();
+            $table->string('contact')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->foreignId('id_departement')->constrained(table:'departements');
             $table->foreignId('id_profil')->constrained(table: 'profils');
             $table->timestamps();
             

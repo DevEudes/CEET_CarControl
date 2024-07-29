@@ -16,16 +16,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * 
  * @property int $id
  * @property string $reference
- * @property string $libelle
+ * @property string $nom
  * @property float $quantite
  * @property string|null $observation
  * @property int $id_type_piece
+ * @property int $id_fournisseur
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
  * @property int|null $created_by
  * @property int|null $updated_by
  * 
+ * @property Fournisseur $fournisseur
  * @property TypePiece $type_piece
  * @property Collection|AchatPiece[] $achat_pieces
  * @property Collection|SortiePiece[] $sortie_pieces
@@ -40,19 +42,26 @@ class Piece extends Model
 	protected $casts = [
 		'quantite' => 'float',
 		'id_type_piece' => 'int',
+		'id_fournisseur' => 'int',
 		'created_by' => 'int',
 		'updated_by' => 'int'
 	];
 
 	protected $fillable = [
 		'reference',
-		'libelle',
+		'nom',
 		'quantite',
 		'observation',
 		'id_type_piece',
+		'id_fournisseur',
 		'created_by',
 		'updated_by'
 	];
+
+	public function fournisseur()
+	{
+		return $this->belongsTo(Fournisseur::class, 'id_fournisseur');
+	}
 
 	public function type_piece()
 	{
@@ -68,22 +77,4 @@ class Piece extends Model
 	{
 		return $this->hasMany(SortiePiece::class, 'id_piece');
 	}
-
-	protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            if (auth()->check()) {
-                $model->created_by = auth()->id();
-                $model->updated_by = auth()->id();
-            }
-        });
-
-        static::updating(function ($model) {
-            if (auth()->check()) {
-                $model->updated_by = auth()->id();
-            }
-        });
-    }
 }

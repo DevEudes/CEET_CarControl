@@ -11,12 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('type_assurances', function (Blueprint $table) {
+        Schema::create('recu_transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('libelle');
-            $table->string('description')->nullable();
-            $table->timestamps();       
-            
+            $table->string('numero_transaction')->unique();
+            $table->string('point_approvisionnement');
+            $table->enum('type_produit', ['essence', 'gasoil']);
+            $table->double('quantite');
+            $table->integer('montant');
+            $table->foreignId('id_app_carte_carburant')->constrained(table:'app_carte_carburants');
+            $table->timestamps();
+
             $table->softDeletes();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
@@ -28,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('type_assurances');
+        Schema::dropIfExists('recu_transactions');
     }
 };

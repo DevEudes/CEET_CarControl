@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('genre_vehicules', function (Blueprint $table) {
             $table->id();
-            $table->string('libelle');
-            $table->string('description')->nullable();
+            $table->string('code')->unique();
+            $table->string('nom');
             $table->timestamps();
             
             $table->softDeletes();

@@ -15,8 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * Class TypePiece
  * 
  * @property int $id
- * @property string $libelle
- * @property string|null $description
+ * @property string $nom
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
@@ -38,8 +37,7 @@ class TypePiece extends Model
 	];
 
 	protected $fillable = [
-		'libelle',
-		'description',
+		'nom',
 		'created_by',
 		'updated_by'
 	];
@@ -48,22 +46,4 @@ class TypePiece extends Model
 	{
 		return $this->hasMany(Piece::class, 'id_type_piece');
 	}
-
-	protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            if (auth()->check()) {
-                $model->created_by = auth()->id();
-                $model->updated_by = auth()->id();
-            }
-        });
-
-        static::updating(function ($model) {
-            if (auth()->check()) {
-                $model->updated_by = auth()->id();
-            }
-        });
-    }
 }

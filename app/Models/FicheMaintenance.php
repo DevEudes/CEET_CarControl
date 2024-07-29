@@ -15,9 +15,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * Class FicheMaintenance
  * 
  * @property int $id
- * @property Carbon $date_entree
- * @property Carbon $date_sortie
- * @property int $index
+ * @property string $numero_maintenance
+ * @property Carbon $date_heure_entree
+ * @property Carbon $date_heure_sortie
+ * @property int $kilometrage
  * @property string $declaration_utilisateur
  * @property string $obsrvation_controleur
  * @property string $inspection_reception
@@ -27,7 +28,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $id_chauffeur
  * @property int $id_vehicule
  * @property int $id_mecanicien
- * @property int $id_user
+ * @property int $id_garage
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
@@ -35,8 +36,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int|null $updated_by
  * 
  * @property Chauffeur $chauffeur
+ * @property Garage $garage
  * @property Mecanicien $mecanicien
- * @property User $user
  * @property Vehicule $vehicule
  * @property Collection|BonSortieMagasin[] $bon_sortie_magasins
  *
@@ -48,21 +49,22 @@ class FicheMaintenance extends Model
 	protected $table = 'fiche_maintenances';
 
 	protected $casts = [
-		'date_entree' => 'datetime',
-		'date_sortie' => 'datetime',
-		'index' => 'int',
+		'date_heure_entree' => 'datetime',
+		'date_heure_sortie' => 'datetime',
+		'kilometrage' => 'int',
 		'id_chauffeur' => 'int',
 		'id_vehicule' => 'int',
 		'id_mecanicien' => 'int',
-		'id_user' => 'int',
+		'id_garage' => 'int',
 		'created_by' => 'int',
 		'updated_by' => 'int'
 	];
 
 	protected $fillable = [
-		'date_entree',
-		'date_sortie',
-		'index',
+		'numero_maintenance',
+		'date_heure_entree',
+		'date_heure_sortie',
+		'kilometrage',
 		'declaration_utilisateur',
 		'obsrvation_controleur',
 		'inspection_reception',
@@ -72,7 +74,7 @@ class FicheMaintenance extends Model
 		'id_chauffeur',
 		'id_vehicule',
 		'id_mecanicien',
-		'id_user',
+		'id_garage',
 		'created_by',
 		'updated_by'
 	];
@@ -82,14 +84,14 @@ class FicheMaintenance extends Model
 		return $this->belongsTo(Chauffeur::class, 'id_chauffeur');
 	}
 
+	public function garage()
+	{
+		return $this->belongsTo(Garage::class, 'id_garage');
+	}
+
 	public function mecanicien()
 	{
 		return $this->belongsTo(Mecanicien::class, 'id_mecanicien');
-	}
-
-	public function user()
-	{
-		return $this->belongsTo(User::class, 'id_user');
 	}
 
 	public function vehicule()
@@ -101,22 +103,4 @@ class FicheMaintenance extends Model
 	{
 		return $this->hasMany(BonSortieMagasin::class, 'id_fiche_maintenance');
 	}
-
-	protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            if (auth()->check()) {
-                $model->created_by = auth()->id();
-                $model->updated_by = auth()->id();
-            }
-        });
-
-        static::updating(function ($model) {
-            if (auth()->check()) {
-                $model->updated_by = auth()->id();
-            }
-        });
-    }
 }

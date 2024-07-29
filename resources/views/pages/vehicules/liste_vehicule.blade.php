@@ -23,7 +23,8 @@
                         <table class="table table-striped table-borderless" style="width: 100%;"> 
                             <thead>
                                 <tr>
-                                    <th>Véhicule</th>
+                                    <th>Marque</th>
+                                    <th>Modèle</th>
                                     <th>Immatriculation</th>
                                     <th>Genre</th>
                                     <th>Index du compteur</th>
@@ -35,9 +36,10 @@
                                 @foreach($affectations as $affectation)
                                 <tr>
                                     <td>{{$affectation->vehicule->marque}}</td>
+                                    <td>{{$affectation->vehicule->modele}}</td>
                                     <td class="font-weight-bold">{{$affectation->vehicule->immatriculation}}</td>
-                                    <td>{{$affectation->vehicule->genre_vehicule->libelle}}</td>
-                                    <td>{{$affectation->vehicule->index}} km</td>
+                                    <td>{{$affectation->vehicule->genre_vehicule->nom}}</td>
+                                    <td>{{$affectation->vehicule->kilometrage}} km</td>
                                     <td>{{$affectation->departement->nom}} </td>
                                     <td class="font-weight-medium"><div class="badge badge-success">{{$affectation->vehicule->etat_vehicule}}</div></td>
                                 </tr>

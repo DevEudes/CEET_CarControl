@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $numero_carte
  * @property int $solde
  * @property Carbon $date_expiration
- * @property int $id_etablissement
+ * @property int $id_compagnie_petroliere
  * @property int $id_vehicule
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -25,7 +25,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int|null $created_by
  * @property int|null $updated_by
  * 
- * @property Etablissement $etablissement
+ * @property CompagniePetroliere $compagnie_petroliere
  * @property Vehicule $vehicule
  *
  * @package App\Models
@@ -39,7 +39,7 @@ class CarteCarburant extends Model
 		'numero_carte' => 'int',
 		'solde' => 'int',
 		'date_expiration' => 'datetime',
-		'id_etablissement' => 'int',
+		'id_compagnie_petroliere' => 'int',
 		'id_vehicule' => 'int',
 		'created_by' => 'int',
 		'updated_by' => 'int'
@@ -49,37 +49,19 @@ class CarteCarburant extends Model
 		'numero_carte',
 		'solde',
 		'date_expiration',
-		'id_etablissement',
+		'id_compagnie_petroliere',
 		'id_vehicule',
 		'created_by',
 		'updated_by'
 	];
 
-	public function etablissement()
+	public function compagnie_petroliere()
 	{
-		return $this->belongsTo(Etablissement::class, 'id_etablissement');
+		return $this->belongsTo(CompagniePetroliere::class, 'id_compagnie_petroliere');
 	}
 
 	public function vehicule()
 	{
 		return $this->belongsTo(Vehicule::class, 'id_vehicule');
 	}
-
-	protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            if (auth()->check()) {
-                $model->created_by = auth()->id();
-                $model->updated_by = auth()->id();
-            }
-        });
-
-        static::updating(function ($model) {
-            if (auth()->check()) {
-                $model->updated_by = auth()->id();
-            }
-        });
-    }
 }

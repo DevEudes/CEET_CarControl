@@ -15,15 +15,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * Class TypeSorty
  * 
  * @property int $id
- * @property string $libelle
- * @property string|null $description
+ * @property string $nom
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
  * @property int|null $created_by
  * @property int|null $updated_by
  * 
- * @property Collection|FicheSorty[] $fiche_sorties
+ * @property Collection|Demande[] $demandes
  *
  * @package App\Models
  */
@@ -38,14 +37,13 @@ class TypeSorty extends Model
 	];
 
 	protected $fillable = [
-		'libelle',
-		'description',
+		'nom',
 		'created_by',
 		'updated_by'
 	];
 
-	public function fiche_sorties()
+	public function demandes()
 	{
-		return $this->hasMany(FicheSorty::class, 'id_type_sortie');
+		return $this->hasMany(Demande::class, 'id_type_sortie');
 	}
 }

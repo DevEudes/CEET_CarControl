@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('fiche_maintenances', function (Blueprint $table) {
             $table->id();
-            $table->date('date_entree');
-            $table->date('date_sortie');
-            $table->integer('index');
+            $table->string('numero_maintenance')->unique();
+            $table->date('date_heure_entree');
+            $table->date('date_heure_sortie');
+            $table->integer('kilometrage');
             $table->string('declaration_utilisateur');
             $table->string('obsrvation_controleur');
             $table->string('inspection_reception');
@@ -25,7 +26,7 @@ return new class extends Migration
             $table->foreignId('id_chauffeur')->constrained(table :'chauffeurs');
             $table->foreignId('id_vehicule')->constrained(table :'vehicules');
             $table->foreignId('id_mecanicien')->constrained(table :'mecaniciens');
-            $table->foreignId('id_user')->constrained(table :'users');
+            $table->foreignId('id_garage')->constrained(table :'garages');
             $table->timestamps();
             
             $table->softDeletes();

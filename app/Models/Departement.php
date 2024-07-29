@@ -16,8 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * 
  * @property int $id
  * @property string $nom
- * @property string $libelle
- * @property string $code_centre_de_responsabilite_
+ * @property string $code_centre_de_responsabilite
  * @property int $id_direction
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -28,8 +27,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Direction $direction
  * @property Collection|Affectation[] $affectations
  * @property Collection|DemandeAchat[] $demande_achats
- * @property Collection|FicheSorty[] $fiche_sorties
- * @property Collection|Profil[] $profils
+ * @property Collection|Demande[] $demandes
+ * @property Collection|User[] $users
  *
  * @package App\Models
  */
@@ -46,8 +45,7 @@ class Departement extends Model
 
 	protected $fillable = [
 		'nom',
-		'libelle',
-		'code_centre_de_responsabilite_',
+		'code_centre_de_responsabilite',
 		'id_direction',
 		'created_by',
 		'updated_by'
@@ -68,31 +66,13 @@ class Departement extends Model
 		return $this->hasMany(DemandeAchat::class, 'id_departement');
 	}
 
-	public function fiche_sorties()
+	public function demandes()
 	{
-		return $this->hasMany(FicheSorty::class, 'id_departement');
+		return $this->hasMany(Demande::class, 'id_departement');
 	}
 
-	public function profils()
+	public function users()
 	{
-		return $this->hasMany(Profil::class, 'id_departement');
+		return $this->hasMany(User::class, 'id_departement');
 	}
-
-	protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            if (auth()->check()) {
-                $model->created_by = auth()->id();
-                $model->updated_by = auth()->id();
-            }
-        });
-
-        static::updating(function ($model) {
-            if (auth()->check()) {
-                $model->updated_by = auth()->id();
-            }
-        });
-    }
 }

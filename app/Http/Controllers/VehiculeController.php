@@ -23,7 +23,7 @@ class VehiculeController extends Controller
             $query->where('id_departement', $departement->id);
         })->with('genre_vehicule')->get();
 
-        return view('index', compact('vehicules_parc_auto'));
+        return view('index', compact( 'vehicules_parc_auto'));
     }
     
     public function list()
@@ -49,13 +49,12 @@ class VehiculeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'code' => 'required|string|unique:vehicules,code',
             'immatriculation' => 'required|string|unique:vehicules,immatriculation',
             'marque' => 'required|string',
             'modele' => 'required|string',
             'numero_moteur' => 'required|string|unique:vehicules,numero_moteur',
             'numero_chassis' => 'required|string|unique:vehicules,numero_chassis',
-            'date_obtention' => 'required|date',
+            'date_achat' => 'required|date',
             'numero_carte_grise' => 'required|integer|unique:vehicules,numero_carte_grise',
             'image_carte_grise' => 'required|string|unique:vehicules,image_carte_grise',
             'validite_garantie' => 'nullable|date',
@@ -66,17 +65,16 @@ class VehiculeController extends Controller
         ]);
 
         $vehicule = new Vehicule();
-        $vehicule->code = $request->code;
         $vehicule->immatriculation = $request->immatriculation;
         $vehicule->marque = $request->marque;
         $vehicule->modele = $request->modele;
         $vehicule->numero_moteur = $request->numero_moteur;
         $vehicule->numero_chassis = $request->numero_chassis;
-        $vehicule->date_obtention = $request->date_obtention;
+        $vehicule->date_achat = $request->date_achat;
         $vehicule->numero_carte_grise = $request->numero_carte_grise;
         $vehicule->image_carte_grise = $request->image_carte_grise;
         $vehicule->validite_garantie = $request->validite_garantie;
-        $vehicule->index = $request->index;
+        $vehicule->kilometrage = $request->kilometrage;
         $vehicule->liste_outillage = $request->liste_outillage;
         $vehicule->etat_vehicule = $request->etat_vehicule;
         $vehicule->id_genre_vehicule = $request->id_genre_vehicule;

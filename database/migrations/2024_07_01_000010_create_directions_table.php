@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('directions', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->string('libelle');
-            $table->integer('code_geographique');
+            $table->integer('code_geographique')->unique();
             $table->foreignId('id_parent')->nullable()->constrained('directions');
             $table->timestamps();
             

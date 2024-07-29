@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('affectations', function (Blueprint $table) {
             $table->id();
+            $table->string('numero_affectation')->unique();
             $table->date('date_affectation');
-            $table->integer('index');
+            $table->integer('kilometrage');
             $table->string('fonction');
             $table->foreignId('id_departement')->constrained(table :'departements');
             $table->foreignId('id_vehicule')->constrained(table :'vehicules');
-            $table->foreignId('id_user')->constrained(table :'users');
             $table->timestamps();
             
             $table->softDeletes();

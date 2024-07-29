@@ -13,30 +13,14 @@ return new class extends Migration
     {
         Schema::create('approvisionnements', function (Blueprint $table) {
             $table->id();
+            $table->string('numero_appvnmt')->unique();
             $table->enum('motif_appvnmt', ['mission', 'feuille_de_route', 'reapprovisionnement']);
-            $table->string('centre_cout_machine')->nullable();
-            $table->string('depense_engagement_concedent')->nullable();
-            $table->string('numero_ot')->nullable();
             $table->enum('type_produit', ['essence', 'gasoil']);
-            $table->date('date_depart');
-            $table->date('date_retour');
-            $table->integer('index_depart');
-            $table->integer('index_retour');
-            $table->integer('solde_carte_depart')->nullable();
-            $table->integer('solde_carte_retour')->nullable();
             $table->double('quantite');
             $table->double('taux_consommation');
-            $table->integer('numero_bon_carburant')->unique()
-                                                ->nullable();
-            $table->integer('numero_bon_sortie_produit_petrolier')->unique()
-                                                                ->nullable();
-            $table->integer('numero_transaction')->unique()
-                                            ->nullable();
             $table->enum('etat_fiche', ['en_cours', 'termine']);
-            $table->foreignId('id_type_approvisionnement')->constrained(table :'type_approvisionnements');
             $table->foreignId('id_chauffeur')->constrained(table :'chauffeurs');
             $table->foreignId('id_vehicule')->constrained(table :'vehicules');
-            $table->foreignId('id_user')->constrained(table :'users');
             $table->timestamps();
             
             $table->softDeletes();

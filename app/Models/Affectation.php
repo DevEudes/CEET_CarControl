@@ -14,12 +14,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * Class Affectation
  * 
  * @property int $id
+ * @property string $numero_affectation
  * @property Carbon $date_affectation
- * @property int $index
+ * @property int $kilometrage
  * @property string $fonction
  * @property int $id_departement
  * @property int $id_vehicule
- * @property int $id_user
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
@@ -27,7 +27,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int|null $updated_by
  * 
  * @property Departement $departement
- * @property User $user
  * @property Vehicule $vehicule
  *
  * @package App\Models
@@ -39,21 +38,20 @@ class Affectation extends Model
 
 	protected $casts = [
 		'date_affectation' => 'datetime',
-		'index' => 'int',
+		'kilometrage' => 'int',
 		'id_departement' => 'int',
 		'id_vehicule' => 'int',
-		'id_user' => 'int',
 		'created_by' => 'int',
 		'updated_by' => 'int'
 	];
 
 	protected $fillable = [
+		'numero_affectation',
 		'date_affectation',
-		'index',
+		'kilometrage',
 		'fonction',
 		'id_departement',
 		'id_vehicule',
-		'id_user',
 		'created_by',
 		'updated_by'
 	];
@@ -63,31 +61,8 @@ class Affectation extends Model
 		return $this->belongsTo(Departement::class, 'id_departement');
 	}
 
-	public function user()
-	{
-		return $this->belongsTo(User::class, 'id_user');
-	}
-
 	public function vehicule()
 	{
 		return $this->belongsTo(Vehicule::class, 'id_vehicule');
 	}
-
-	protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            if (auth()->check()) {
-                $model->created_by = auth()->id();
-                $model->updated_by = auth()->id();
-            }
-        });
-
-        static::updating(function ($model) {
-            if (auth()->check()) {
-                $model->updated_by = auth()->id();
-            }
-        });
-    }
 }

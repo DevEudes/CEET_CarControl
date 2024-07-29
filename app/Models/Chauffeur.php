@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
 
 namespace App\Models;
 
@@ -64,22 +67,4 @@ class Chauffeur extends Model
 	{
 		return $this->hasMany(FicheSorty::class, 'id_chauffeur');
 	}
-
-	protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            if (auth()->check()) {
-                $model->created_by = auth()->id();
-                $model->updated_by = auth()->id();
-            }
-        });
-
-        static::updating(function ($model) {
-            if (auth()->check()) {
-                $model->updated_by = auth()->id();
-            }
-        });
-    }
 }

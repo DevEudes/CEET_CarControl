@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('numero_carte')->unique();
             $table->integer('solde');
             $table->date('date_expiration');
-            $table->foreignId('id_etablissement')->constrained(table: 'etablissements');
+            $table->foreignId('id_compagnie_petroliere')->constrained(table: 'compagnie_petrolieres');
             $table->foreignId('id_vehicule')->constrained(table: 'vehicules');
             $table->timestamps();
             

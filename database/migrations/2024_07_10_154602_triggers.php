@@ -52,7 +52,7 @@ return new class extends Migration
             AFTER UPDATE ON fiche_maintenances
             FOR EACH ROW
             BEGIN
-                IF NEW.etat_fiche = "termine" AND NOW() > NEW.date_sortie THEN
+                IF NEW.etat_fiche = "termine" AND NOW() > NEW.date_heure_sortie THEN
                     UPDATE vehicules 
                     SET etat_vehicule = "bon_etat"
                     WHERE id = NEW.id_vehicule;

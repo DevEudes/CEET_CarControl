@@ -28,8 +28,8 @@
                 <h3 style="text-align:center;">Sécurité</h3>
                 <div class="mt-4">
                     <x-input-label for="email" :value="__('Téléphone')" />
-                    <x-text-input id="tel" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" type="tel" name="tel" :value="old('tel')" required autocomplete="tel" />
-                    <x-input-error :messages="$errors->get('tel')" class="mt-2" />
+                    <x-text-input id="contact" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" type="text" name="contact" :value="old('contact')" required autocomplete="contact" />
+                    <x-input-error :messages="$errors->get('contact')" class="mt-2" />
                 </div>
                 <div class="mt-4">
                     <x-input-label for="email" :value="__('Email')" />
@@ -52,11 +52,21 @@
             <div class="page" id="page3">
                 <h3 style="text-align:center;">Rôle et Profil</h3>
                 <div class="mt-4">
+                    <x-input-label for="id_departement" :value="__('Département')" />
+                    <select id="id_departement" name="id_departement" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" required>
+                        <option value="" class="bg-merino text-gray-500">{{ __('Sélectionner le département de l\'utilisateur') }}</option>
+                        @foreach ($departements as $departement)
+                            <option value="{{ $departement->id }}" class="bg-merino text-gray-900">{{ $departement->nom }}</option>
+                        @endforeach
+                    </select>
+                    <x-input-error :messages="$errors->get('id_departement')" class="mt-2" />
+                </div>
+                <div class="mt-4">
                     <x-input-label for="id_profil" :value="__('Profil')" />
                     <select id="id_profil" name="id_profil" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" required>
                         <option value="" class="bg-merino text-gray-500">{{ __('Sélectionner le profil de l\'utilisateur') }}</option>
                         @foreach ($profils as $profil)
-                            <option value="{{ $profil->id }}" class="bg-merino text-gray-900">{{ $profil->libelle }}</option>
+                            <option value="{{ $profil->id }}" class="bg-merino text-gray-900">{{ $profil->nom}}</option>
                         @endforeach
                     </select>
                     <x-input-error :messages="$errors->get('id_profil')" class="mt-2" />

@@ -11,12 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('type_approvisionnements', function (Blueprint $table) {
+        Schema::create('app_carte_carburants', function (Blueprint $table) {
             $table->id();
-            $table->string('libelle');
-            $table->string('description')->nullable();
+            $table->date('date_heure_depart');
+            $table->date('date_heure_retour');
+            $table->integer('kilometrage_depart');
+            $table->integer('kilometrage_retour');
+            $table->integer('solde_carte_depart');
+            $table->integer('solde_carte_retour');
+            $table->foreignId('id_approvisionnement')->constrained(table:'approvisionnements');
             $table->timestamps();
-            
+
             $table->softDeletes();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
@@ -28,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('type_approvisionnements');
+        Schema::dropIfExists('app_carte_carburants');
     }
 };

@@ -19,8 +19,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon $date_debut
  * @property Carbon $date_expiration
  * @property string $image
- * @property int $id_type_assurance
- * @property int $id_etablissement
+ * @property string $type_assurance
+ * @property int $id_compagnie_assurance
  * @property int $id_vehicule
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -28,8 +28,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int|null $created_by
  * @property int|null $updated_by
  * 
- * @property Etablissement $etablissement
- * @property TypeAssurance $type_assurance
+ * @property CompagnieAssurance $compagnie_assurance
  * @property Vehicule $vehicule
  *
  * @package App\Models
@@ -44,8 +43,7 @@ class Assurance extends Model
 		'montatnt' => 'int',
 		'date_debut' => 'datetime',
 		'date_expiration' => 'datetime',
-		'id_type_assurance' => 'int',
-		'id_etablissement' => 'int',
+		'id_compagnie_assurance' => 'int',
 		'id_vehicule' => 'int',
 		'created_by' => 'int',
 		'updated_by' => 'int'
@@ -57,43 +55,20 @@ class Assurance extends Model
 		'date_debut',
 		'date_expiration',
 		'image',
-		'id_type_assurance',
-		'id_etablissement',
+		'type_assurance',
+		'id_compagnie_assurance',
 		'id_vehicule',
 		'created_by',
 		'updated_by'
 	];
 
-	public function etablissement()
+	public function compagnie_assurance()
 	{
-		return $this->belongsTo(Etablissement::class, 'id_etablissement');
-	}
-
-	public function type_assurance()
-	{
-		return $this->belongsTo(TypeAssurance::class, 'id_type_assurance');
+		return $this->belongsTo(CompagnieAssurance::class, 'id_compagnie_assurance');
 	}
 
 	public function vehicule()
 	{
 		return $this->belongsTo(Vehicule::class, 'id_vehicule');
 	}
-	
-	protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            if (auth()->check()) {
-                $model->created_by = auth()->id();
-                $model->updated_by = auth()->id();
-            }
-        });
-
-        static::updating(function ($model) {
-            if (auth()->check()) {
-                $model->updated_by = auth()->id();
-            }
-        });
-    }
 }

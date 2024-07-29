@@ -18,8 +18,8 @@ return new class extends Migration
             $table->date('date_debut');
             $table->date('date_expiration');
             $table->string('image');
-            $table->foreignId('id_type_assurance')->constrained(table: 'type_assurances');
-            $table->foreignId('id_etablissement')->constrained(table: 'etablissements');
+            $table->enum('type_assurance', ['assurance_tout_risque', 'responsabilite_civile_cedeao_securite_routiere', 'responsabilite_civile_securite_routiere', 'en_maintenance']);
+            $table->foreignId('id_compagnie_assurance')->constrained(table: 'compagnie_assurances');
             $table->foreignId('id_vehicule')->constrained(table: 'vehicules');
             $table->timestamps();
             

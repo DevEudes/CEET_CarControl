@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('type_pieces', function (Blueprint $table) {
             $table->id();
-            $table->string('libelle');
-            $table->string('description')->nullable();
+            $table->string('nom');
             $table->timestamps();
             
             $table->softDeletes();

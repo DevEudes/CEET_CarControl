@@ -17,8 +17,8 @@ return new class extends Migration
             $table->date('date');
             $table->string('centre_cout_machine');
             $table->string('depense_engagement_concedent');
-            $table->string('numero_ot');
-            $table->string('motif');
+            $table->string('numero_ot')->unique();
+            $table->enum('motif',['reapprovisionnement_du_magasin', 'exploitation', 'investissement']);
             $table->foreignId('id_departement')->constrained(table :'departements');
             $table->foreignId('id_user')->constrained(table :'users');
             $table->timestamps();

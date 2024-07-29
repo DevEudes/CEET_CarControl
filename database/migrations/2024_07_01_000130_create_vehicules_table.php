@@ -13,20 +13,20 @@ return new class extends Migration
     {
         Schema::create('vehicules', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique();
             $table->string('immatriculation')->unique();
             $table->string('marque');
             $table->string('modele');
             $table->string('numero_moteur')->unique();
             $table->string('numero_chassis')->unique();
-            $table->date('date_obtention');
+            $table->date('date_achat');
             $table->integer('numero_carte_grise')->unique();
             $table->string('image_carte_grise')->unique();
             $table->date('validite_garantie')->nullable();
-            $table->integer('index');
+            $table->integer('kilometrage');
             $table->string('liste_outillage');
             $table->enum('etat_vehicule', ['neuf', 'bon_etat', 'indisponible', 'en_maintenance', 'etat_passable', 'mauvais_etat', 'rebut'])->default('neuf');
             $table->foreignId('id_genre_vehicule')->constrained(table: 'genre_vehicules');
+            $table->foreignId('id_fournisseur')->constrained(table: 'fournisseurs');
             $table->timestamps();
             
             $table->softDeletes();

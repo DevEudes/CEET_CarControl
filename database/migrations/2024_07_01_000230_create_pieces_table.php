@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('pieces', function (Blueprint $table) {
             $table->id();
             $table->string('reference')->nullable(false);
-            $table->string('libelle');
+            $table->string('nom');
             $table->double('quantite');
             $table->string('observation')->nullable(true);
             $table->foreignId('id_type_piece')->constrained(table :'type_pieces');
+            $table->foreignId('id_fournisseur')->constrained(table :'fournisseurs');
             $table->timestamps();
             
             $table->softDeletes();

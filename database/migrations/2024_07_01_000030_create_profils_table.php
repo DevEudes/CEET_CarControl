@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('profils', function (Blueprint $table) {
             $table->id();
-            $table->String('libelle');
+            $table->String('nom');
             $table->String('description');
-            $table->foreignId('id_departement')->constrained(table:'departements');
             $table->timestamps();
             
             $table->softDeletes();

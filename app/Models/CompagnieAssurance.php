@@ -12,11 +12,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class TypeAssurance
+ * Class CompagnieAssurance
  * 
  * @property int $id
- * @property string $libelle
- * @property string|null $description
+ * @property string $code
+ * @property string $nom
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
@@ -27,10 +27,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @package App\Models
  */
-class TypeAssurance extends Model
+class CompagnieAssurance extends Model
 {
 	use SoftDeletes;
-	protected $table = 'type_assurances';
+	protected $table = 'compagnie_assurances';
 
 	protected $casts = [
 		'created_by' => 'int',
@@ -38,32 +38,14 @@ class TypeAssurance extends Model
 	];
 
 	protected $fillable = [
-		'libelle',
-		'description',
+		'code',
+		'nom',
 		'created_by',
 		'updated_by'
 	];
 
 	public function assurances()
 	{
-		return $this->hasMany(Assurance::class, 'id_type_assurance');
+		return $this->hasMany(Assurance::class, 'id_compagnie_assurance');
 	}
-
-	protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            if (auth()->check()) {
-                $model->created_by = auth()->id();
-                $model->updated_by = auth()->id();
-            }
-        });
-
-        static::updating(function ($model) {
-            if (auth()->check()) {
-                $model->updated_by = auth()->id();
-            }
-        });
-    }
 }
