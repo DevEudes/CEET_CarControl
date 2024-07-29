@@ -28,8 +28,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int|null $updated_by
  * 
  * @property Departement $departement
- * @property TypeSorty $type_sorty
- * @property Collection|FicheSorty[] $fiche_sorties
+ * @property Typesortie $type_sortie
+ * @property Collection|Fichesortie[] $fiche_sorties
  *
  * @package App\Models
  */
@@ -62,13 +62,13 @@ class Demande extends Model
 		return $this->belongsTo(Departement::class, 'id_departement');
 	}
 
-	public function type_sorty()
+	public function type_sortie()
 	{
-		return $this->belongsTo(TypeSorty::class, 'id_type_sortie');
+		return $this->belongsTo(Typesortie::class, 'id_type_sortie');
 	}
 
 	public function fiche_sorties()
 	{
-		return $this->hasMany(FicheSorty::class, 'id_demande');
+		return $this->hasMany(Fichesortie::class, 'id_demande');
 	}
 }

@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class FicheSorty
+ * Class Fichesortie
  * 
  * @property int $id
  * @property Carbon $date_heure_depart
@@ -40,7 +40,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @package App\Models
  */
-class FicheSorty extends Model
+class Fichesortie extends Model
 {
 	use SoftDeletes;
 	protected $table = 'fiche_sorties';

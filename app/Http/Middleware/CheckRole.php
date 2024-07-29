@@ -16,8 +16,8 @@ class CheckRole
      */
     public function handle($request, Closure $next, $role)
     {
-        if (!Auth::check() || !Auth::users()->hasRole($role)) {
-            abort(403);
+        if (!Auth::check() || !Auth::user()->hasRole($role)) {
+            return response()->view('erreur403');
         }
         return $next($request);
     }

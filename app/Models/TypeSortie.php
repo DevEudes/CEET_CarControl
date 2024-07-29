@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class TypeSorty
+ * Class Typesortie
  * 
  * @property int $id
  * @property string $nom
@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @package App\Models
  */
-class TypeSorty extends Model
+class Typesortie extends Model
 {
 	use SoftDeletes;
 	protected $table = 'type_sorties';

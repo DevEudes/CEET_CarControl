@@ -83,20 +83,24 @@ Route::middleware(['auth', 'can:view-pieces'])->group(function () {
     Route::resource('pieces', PieceController::class);
 });
 
-// Routes pour les TVM avec permissions
-Route::middleware(['auth', 'can:view-tvms'])->group(function () {
-    Route::resource('tvms', TvmController::class);
+// Routes pour les pièces avec permissions
+Route::middleware(['auth', 'can:view-documents'])->group(function () {
+    // Routes pour les TVM avec permissions
+    Route::middleware(['auth', 'can:view-tvms'])->group(function () {
+        Route::resource('tvms', TvmController::class);
+    });
+
+    // Routes pour les visites techniques avec permissions
+    Route::middleware(['auth', 'can:view-visite-techniques'])->group(function () {
+        Route::resource('visiteTechniques', VisiteTechniqueController::class);
+    });
+
+    // Routes pour les assurances avec permissions
+    Route::middleware(['auth', 'can:view-assurances'])->group(function () {
+        Route::resource('assurances', AssuranceController::class);
+    });
 });
 
-// Routes pour les visites techniques avec permissions
-Route::middleware(['auth', 'can:view-visite-techniques'])->group(function () {
-    Route::resource('visiteTechniques', VisiteTechniqueController::class);
-});
-
-// Routes pour les assurances avec permissions
-Route::middleware(['auth', 'can:view-assurances'])->group(function () {
-    Route::resource('assurances', AssuranceController::class);
-});
 
 // Routes pour les utilisateurs avec les permissions
 Route::resource('utilisateurs', UtilisateurController::class);

@@ -52,7 +52,7 @@ public function store(Request $request)
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         'password' => ['required', 'confirmed', Rules\Password::defaults()],
         'id_profil' => ['required', 'exists:profils,id'],
-        'id_departement' => ['required', 'exists:departements,id'], // Ajout de cette ligne
+        'id_departement' => ['required', 'exists:departements,id'],
         'role' => ['required', 'exists:roles,name'],
     ]);
 
@@ -64,7 +64,7 @@ public function store(Request $request)
         'email' => $request->email,
         'password' => Hash::make($request->password),
         'id_profil' => $request->id_profil,
-        'id_departement' => $request->id_departement, // Ajout de cette ligne
+        'id_departement' => $request->id_departement,
     ]);
 
     // Attribuer le rôle à l'utilisateur
@@ -72,7 +72,7 @@ public function store(Request $request)
 
     event(new Registered($user));
 
-    return redirect()->route('utilisateurs.create');
+    return redirect()->route('utilisateurs.create')->with('success', 'Utilisateur créé avec succès.');
 }
 
 

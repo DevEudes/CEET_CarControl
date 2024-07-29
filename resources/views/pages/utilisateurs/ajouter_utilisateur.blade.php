@@ -1,49 +1,56 @@
 @extends('dashboard')
 @section('dashboard_container')
+<head>
+    <!-- SweetAlert CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <!-- SweetAlert JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
 <body>
     <main>
         <form method="POST" action="{{ route('utilisateurs.store') }}" class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg border border-crimson focus:border-crimson focus:ring-crimson" style="background-color: #f9f7ed; box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2), 0px 6px 6px rgba(0, 0, 0, 0.23); margin: 1em 350px 15px 190px; padding: 5px 50px 10px 50px; border-radius: 20px;">
             <h2 style="text-align: center; padding-bottom:40px; text-decoration: underline crimson;">Création d'un utilisateur</h2>
             @csrf
             <div class="page" id="page1">
-                <h3 style="text-align:center;">Identité</h3>
-                <div class="mt-4">
-                    <x-input-label for="matricule" :value="__('Matricule')" />
-                    <x-text-input id="matricule" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" type="text" name="matricule" :value="old('matricule')" required autofocus autocomplete="matricule" />
-                    <x-input-error :messages="$errors->get('matricule')" class="mt-2" />
-                </div>
+                <h3 style="text-align:center;">Informations Personnelle</h3>
                 <div class="mt-4">
                     <x-input-label for="nom" :value="__('Nom')" />
-                    <x-text-input id="nom" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" type="text" name="nom" :value="old('nom')" required autocomplete="nom" />
+                    <x-text-input id="nom" placeholder="nom" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" type="text" name="nom" :value="old('nom')" required autocomplete="nom" />
                     <x-input-error :messages="$errors->get('nom')" class="mt-2" />
                 </div>
                 <div class="mt-4">
                     <x-input-label for="prenom" :value="__('Prénom')" />
-                    <x-text-input id="prenom" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" type="text" name="prenom" :value="old('prenom')" required autocomplete="prenom" />
-                    <x-input-error :messages="$errors->get('prenom')" class="mt-2" />
+                    <x-text-input id="prenom" placeholder="prénom" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" type="text" name="prenom" :value="old('prenom')" required autocomplete="prenom" />
+                    <x-input-error :messages="$errors->get('prénom')" class="mt-2" />
+                </div>
+                <div class="mt-4">
+                    <x-input-label for="email" :value="__('Téléphone')" />
+                    <x-text-input id="contact"  placeholder="téléphone" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" type="text" name="contact" :value="old('contact')" required autocomplete="contact" />
+                    <x-input-error :messages="$errors->get('contact')" class="mt-2" />
+                </div>
+                <div class="mt-4">
+                    <x-input-label for="email" :value="__('Email')" />
+                    <x-text-input id="email" placeholder="email" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" type="email" name="email" :value="old('email')" required autocomplete="username" />
+                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
                 <button class="next bg-crimson text-white rounded-md px-4 py-2 mt-4"style="border-radius: 20px; background-color: #E19F2E;">Suivant</button>
             </div>
             <div class="page" id="page2">
                 <h3 style="text-align:center;">Sécurité</h3>
                 <div class="mt-4">
-                    <x-input-label for="email" :value="__('Téléphone')" />
-                    <x-text-input id="contact" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" type="text" name="contact" :value="old('contact')" required autocomplete="contact" />
-                    <x-input-error :messages="$errors->get('contact')" class="mt-2" />
-                </div>
-                <div class="mt-4">
-                    <x-input-label for="email" :value="__('Email')" />
-                    <x-text-input id="email" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" type="email" name="email" :value="old('email')" required autocomplete="username" />
-                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                    <x-input-label for="matricule" :value="__('Matricule')" />
+                    <x-text-input id="matricule" placeholder="matricule" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" type="text" name="matricule" :value="old('matricule')" required autofocus autocomplete="matricule" />
+                    <x-input-error :messages="$errors->get('matricule')" class="mt-2" />
                 </div>
                 <div class="mt-4">
                     <x-input-label for="password" :value="__('Mot de passe')" />
-                    <x-text-input id="password" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" type="password" name="password" required autocomplete="new-password" />
+                    <x-text-input id="password" placeholder="mot de passe" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" type="password" name="password" required autocomplete="new-password" />
                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
                 </div>
                 <div class="mt-4">
                     <x-input-label for="password_confirmation" :value="__('Confirmer le mot de passe')" />
-                    <x-text-input id="password_confirmation" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" type="password" name="password_confirmation" required autocomplete="new-password" />
+                    <x-text-input id="password_confirmation" placeholder="confirmation de mot de passe" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" type="password" name="password_confirmation" required autocomplete="new-password" />
                     <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                 </div>
                 <button class="prev bg-gray-500 text-white rounded-md px-4 py-2 mt-4" style="border-radius: 20px; background-color: #E19F2E;">Précédent</button>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -254,6 +261,16 @@
         document.querySelectorAll(".prev").forEach(button => {
             button.addEventListener("click", pagePrecedente);
         });
+
+         // SweetAlert pour la confirmation de la création de l'utilisateur
+    @if(session('success'))
+        Swal.fire({
+            title: 'Succès!',
+            text: '{{ session('success') }}',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    @endif
     </script>
 </body>
 </html>

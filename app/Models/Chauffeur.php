@@ -28,7 +28,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * 
  * @property Collection|Approvisionnement[] $approvisionnements
  * @property Collection|FicheMaintenance[] $fiche_maintenances
- * @property Collection|FicheSorty[] $fiche_sorties
+ * @property Collection|Fichesortie[] $fiche_sorties
  *
  * @package App\Models
  */
@@ -65,6 +65,6 @@ class Chauffeur extends Model
 
 	public function fiche_sorties()
 	{
-		return $this->hasMany(FicheSorty::class, 'id_chauffeur');
+		return $this->hasMany(Fichesortie::class, 'id_chauffeur');
 	}
 }

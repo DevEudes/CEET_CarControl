@@ -67,11 +67,6 @@ class BonSortieMagasin extends Model
 		return $this->belongsTo(FicheMaintenance::class, 'id_fiche_maintenance');
 	}
 
-	public function user()
-	{
-		return $this->belongsTo(User::class, 'id_user');
-	}
-
 	public function sortie_pieces()
 	{
 		return $this->hasMany(SortiePiece::class, 'id_bon_sortie_magasin');

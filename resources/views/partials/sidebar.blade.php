@@ -127,21 +127,7 @@
             </div>
         </li>
         @endcan
-
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        
-            <i class="icon-head menu-icon"></i>
-                <span class="menu-title">User Pages</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="auth">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-                </ul>
-            </div>
-        </li>
+        @can('view-documents')
         <li class="nav-item" id="document">
             <a class="nav-link" data-toggle="collapse" href="#documents" aria-expanded="false">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        
@@ -165,6 +151,7 @@
                 </ul>
             </div>
         </li>
+        @endcan
     </ul>
 </nav>
 

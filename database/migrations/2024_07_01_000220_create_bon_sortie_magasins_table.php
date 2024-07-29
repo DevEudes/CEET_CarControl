@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('numero_ot')->unique();
             $table->enum('type_utilisation_materiel', ['exploitation', 'investissement', 'cession']);
             $table->foreignId('id_fiche_maintenance')->constrained(table :'fiche_maintenances');
-            $table->foreignId('id_user')->constrained(table :'users');
             $table->timestamps();
             
             $table->softDeletes();

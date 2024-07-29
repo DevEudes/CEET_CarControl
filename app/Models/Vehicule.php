@@ -42,7 +42,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Collection|Assurance[] $assurances
  * @property Collection|CarteCarburant[] $carte_carburants
  * @property Collection|FicheMaintenance[] $fiche_maintenances
- * @property Collection|FicheSorty[] $fiche_sorties
+ * @property Collection|Fichesortie[] $fiche_sorties
  * @property Collection|TVM[] $t_v_m_s
  * @property Collection|VisiteTechnique[] $visite_techniques
  *
@@ -120,7 +120,7 @@ class Vehicule extends Model
 
 	public function fiche_sorties()
 	{
-		return $this->hasMany(FicheSorty::class, 'id_vehicule');
+		return $this->hasMany(Fichesortie::class, 'id_vehicule');
 	}
 
 	public function t_v_m_s()

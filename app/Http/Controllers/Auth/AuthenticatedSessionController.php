@@ -60,6 +60,7 @@ class AuthenticatedSessionController extends Controller
                 ])->withInput();
             }
         }
+        
 
         return redirect()->route('login')->withErrors([
             'authentication' => 'Email ou mot de passe incorrect.',
