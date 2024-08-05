@@ -46,6 +46,7 @@ Route::middleware(['auth', 'can:view-vehicles'])->group(function () {
 Route::middleware(['auth', 'can:manage-vehicles'])->group(function () {
     Route::get('vehicules/create', [VehiculeController::class, 'create'])->name('vehicules.create');
     Route::post('vehicules/store', [VehiculeController::class, 'store'])->name('vehicules.store');
+    Route::get('/vehicules/check-unique', [VehiculeController::class, 'checkUnique'])->name('vehicules.checkUnique');
 });
 
 // Routes pour les sorties avec permissions
@@ -61,7 +62,11 @@ Route::middleware(['auth', 'can:view-approvisionnements'])->group(function () {
 // Routes pour les affectations avec permissions
 Route::middleware(['auth', 'can:view-affectations'])->group(function () {
     Route::resource('affectations', AffectationController::class);
+    Route::get('/vehicules/get-immatriculations', [AffectationController::class, 'getImmatriculations'])->name('vehicules.get-immatriculations');
+    Route::get('/vehicules/get-info/{immatriculation}', [AffectationController::class, 'getVehicleInfo']);
 });
+
+
 
 // Routes pour les achats avec permissions
 Route::middleware(['auth', 'can:view-achats'])->group(function () {

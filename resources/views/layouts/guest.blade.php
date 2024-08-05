@@ -37,6 +37,7 @@
 <style>
     .bg-crimson {
         background-color: #ef1212;
+        border-color: transparent;
     }
 
     .border-crimson {

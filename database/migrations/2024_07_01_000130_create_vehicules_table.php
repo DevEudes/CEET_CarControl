@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('numero_moteur')->unique();
             $table->string('numero_chassis')->unique();
             $table->date('date_achat');
-            $table->integer('numero_carte_grise')->unique();
+            $table->bigInteger('numero_carte_grise')->unique();
             $table->string('image_carte_grise')->unique();
             $table->date('validite_garantie')->nullable();
             $table->integer('kilometrage');

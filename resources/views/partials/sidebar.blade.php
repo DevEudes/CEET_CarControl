@@ -26,6 +26,23 @@
         </li>
         @endcan
 
+        @can('view-affectations')
+        <li class="nav-item" id="affectation">
+            <a class="nav-link" data-toggle="collapse" href="#aut" aria-expanded="false">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        
+            <i class="mdi mdi-share menu-icon"></i>
+                <span class="menu-title">Fiche d'affection</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="aut">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('affectations.index') }}">Liste des fiches </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('affectations.create') }}"> Ajouter </a></li>
+                </ul>
+            </div>
+        </li>
+        @endcan
+        
         @can('view-sorties')
         <li class="nav-item" id="sortie">
             <a class="nav-link" data-toggle="collapse" href="#fiche_sortie" aria-expanded="false">
@@ -111,22 +128,6 @@
         </li>
         @endcan
 
-        @can('view-affectations')
-        <li class="nav-item" id="affectation">
-            <a class="nav-link" data-toggle="collapse" href="#aut" aria-expanded="false">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        
-            <i class="mdi mdi-share menu-icon"></i>
-                <span class="menu-title">Fiche d'affection</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="aut">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('affectations.index') }}">Liste des fiches </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{ route('affectations.create') }}"> Ajouter </a></li>
-                </ul>
-            </div>
-        </li>
-        @endcan
         @can('view-documents')
         <li class="nav-item" id="document">
             <a class="nav-link" data-toggle="collapse" href="#documents" aria-expanded="false">

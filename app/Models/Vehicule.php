@@ -62,7 +62,7 @@ class Vehicule extends Model
 		'id_fournisseur' => 'int',
 		'created_by' => 'int',
 		'updated_by' => 'int'
-	];
+	]; 
 
 	protected $fillable = [
 		'immatriculation',
