@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use App\Models\Affectation;
 use App\Models\Departement;
+use App\Models\Marque;
+use App\Models\Modele;
 use App\Models\Vehicule;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -30,10 +32,12 @@ class AffectationController extends Controller
         $vehicules = Vehicule::all();
         $departements = Departement::all();
         $vehicule = null;
+        $marques = Marque::all();
+        $modeles = Modele::all();
     
         // Vérification de l'existence de 'vehicule_id' dans la requête
         if ($request->has('vehicule_id')) {
-            $vehicule = Vehicule::find($request->vehicule_id);
+            $vehicule = Vehicule::with('marque', 'modele')->find($request->vehicule_id);
         }
     
         // Générer 'numero_affectation'
@@ -65,7 +69,7 @@ class AffectationController extends Controller
         // Validation des données du formulaire
         $request->validate([
             'numero_affectation' => 'required|string|max:255|unique:affectations',
-            'date_affectation' => 'required|date',
+            'date_affectation' => 'required|date|before_or_equal:today',
             'kilometrage' => 'required|integer',
             'fonction' => 'required|string|max:255',
             'id_departement' => 'required|integer|exists:departements,id',
@@ -119,8 +123,8 @@ class AffectationController extends Controller
             return response()->json([
                 'success' => true,
                 'vehicule' => [
-                    'marque' => $vehicule->marque,
-                    'modele' => $vehicule->modele
+                    'marque' => $vehicule->marque->nom,
+                    'modele' => $vehicule->modele->nom
                 ]
             ]);
         }

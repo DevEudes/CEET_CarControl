@@ -27,7 +27,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int|null $created_by
  * @property int|null $updated_by
  * 
- * @property AppBonSortie $app_bon_sortie
+ * @property AppBonsortie $app_bon_sortie
  * @property CompagniePetroliere $compagnie_petroliere
  *
  * @package App\Models
@@ -60,7 +60,7 @@ class BonCarburant extends Model
 
 	public function app_bon_sortie()
 	{
-		return $this->belongsTo(AppBonSortie::class, 'id_app_bon_sortie');
+		return $this->belongsTo(AppBonsortie::class, 'id_app_bon_sortie');
 	}
 
 	public function compagnie_petroliere()

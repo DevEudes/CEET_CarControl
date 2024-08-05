@@ -22,7 +22,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $numero_ot
  * @property string $type_utilisation_materiel
  * @property int $id_fiche_maintenance
- * @property int $id_user
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
@@ -30,7 +29,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int|null $updated_by
  * 
  * @property FicheMaintenance $fiche_maintenance
- * @property User $user
  * @property Collection|SortiePiece[] $sortie_pieces
  *
  * @package App\Models
@@ -44,7 +42,6 @@ class BonSortieMagasin extends Model
 		'numero_bon_sortie' => 'int',
 		'date' => 'datetime',
 		'id_fiche_maintenance' => 'int',
-		'id_user' => 'int',
 		'created_by' => 'int',
 		'updated_by' => 'int'
 	];
@@ -57,7 +54,6 @@ class BonSortieMagasin extends Model
 		'numero_ot',
 		'type_utilisation_materiel',
 		'id_fiche_maintenance',
-		'id_user',
 		'created_by',
 		'updated_by'
 	];

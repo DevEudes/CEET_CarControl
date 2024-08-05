@@ -17,13 +17,13 @@ return new class extends Migration
             $table->date('date_heure_retour');
             $table->integer('kilometrage_depart');
             $table->integer('kilometrage_retour');
-            $table->string('etat_depart');
-            $table->enum('etat_retour', ['bon_etat', 'etat_passable', 'mauvais_etat']);
+            $table->enum('etat_depart', ['bon etat', 'etat passable', 'mauvais etat']);
+            $table->enum('etat_retour', ['bon etat', 'etat passable', 'mauvais etat']);
             $table->double('estimation_besoin_carburant');
             $table->integer('estimation_nombre_kilometre');
             $table->string('observation_depart')->nullable();
             $table->string('observation_retour')->nullable();
-            $table->enum('etat_fiche', ['en_cours', 'termine']);
+            $table->enum('etat_fiche', ['en cours', 'termine']);
             $table->foreignId('id_chauffeur')->constrained(table: 'chauffeurs');
             $table->foreignId('id_vehicule')->constrained(table: 'vehicules');
             $table->foreignId('id_demande')->constrained(table: 'demandes');

@@ -40,7 +40,7 @@
                 <x-input-error :messages="$errors->get('numero_affectation')" class="mt-2" />
             </div>
             <div class="mt-4">
-                <x-input-label for="immatriculation" :value="__('Immatriculation')" />
+                <x-input-label for="immatriculation" :value="__('Immatriculation')" /><br>
                 <select id="immatriculation" name="immatriculation" class="js-example-basic-single block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson select2" required>
                     <option value="">{{ __('Sélectionner une immatriculation')}}</option>
                     @foreach ($vehicules as $v)
@@ -54,12 +54,12 @@
             </div>
             <div class="mt-4">
                 <x-input-label for="marque" :value="__('Marque')" />
-                <x-text-input id="marque" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" type="text" name="marque" :value="old('marque', $vehicule->marque ?? '')" readonly />
+                <x-text-input id="marque" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" type="text" name="marque" :value="old('marque', $vehicule->marque->nom ?? '')" readonly />
                 <x-input-error :messages="$errors->get('marque')" class="mt-2" />
             </div>
             <div class="mt-4">
                 <x-input-label for="modele" :value="__('Modèle')" />
-                <x-text-input id="modele" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" type="text" name="modele" :value="old('modele', $vehicule->modele ?? '')" readonly />
+                <x-text-input id="modele" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" type="text" name="modele" :value="old('modele', $vehicule->modele->nom ?? '')" readonly />
                 <x-input-error :messages="$errors->get('modele')" class="mt-2" />
             </div>
             <button type="button" class="next bg-crimson text-white rounded-md px-4 py-2 mt-4" style="border-radius: 20px; background-color: #5AC85A; border-color: transparent">Suivant <img src="{{ url('images/chevron-droit.png/') }}" style="width:20px;"/></button>
@@ -72,7 +72,8 @@
                     id="date_affectation" 
                     placeholder="Date d'affectation" 
                     class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" 
-                    type="date" 
+                    type="date"
+                    max="{{ date('Y-m-d') }}" 
                     name="date_affectation" 
                     :value="old('date_affectation')" 
                     required 
@@ -80,7 +81,7 @@
                     oninput="validateDateAffectation(this)" 
                 />
                 <x-input-error :messages="$errors->get('date_affectation')" class="mt-2" style="color: red"/>
-                <small id="dateAffectationFeedback" class="text-crimson" style="display:none;">La date doit être dans l'année courante.</small>
+                <small id="dateAffectationFeedback" class="text-crimson" style="display:none;">La date est incorrect.</small>
             </div>
             <div class="mt-4">
                 <x-input-label for="kilometrage" :value="__('Kilométrage')" />
@@ -189,7 +190,7 @@
     /* Styles personnalisés pour le menu déroulant Select2 */
     .select2-container--default .select2-selection--single {
         height: 38px;
-        width: 100% !important;
+        width: 600px !important;
         padding: 5px;
         border-color: #ddd;
         border-radius: 4px;
@@ -248,12 +249,6 @@
                     input.classList.remove('border-crimson'); // Retirer la surbrillance des champs valides
                 }
 
-                // Validation spécifique pour les dates
-                if (input.type === 'date' && input.id === 'date_affectation') {
-                    if (!validateDateAffectation(input)) {
-                        formValid = false;
-                    }
-                }
             });
 
             if (!formValid) {
@@ -295,50 +290,31 @@
         });
     });
 
-        // Initialiser Select2 avec des options personnalisées
-        $('#immatriculation, #id_departement').select2({
-            placeholder: 'Sélectionner une option',
-            allowClear: true,
-            width: 'resolve'
-        });
+    // Initialiser Select2 avec des options personnalisées
+    $('#immatriculation, #id_departement').select2({
+        placeholder: 'Sélectionner une option',
+        allowClear: true,
+        width: 'resolve'
+    });
 
-        // Gérer la sélection d'un numéro d'immatriculation de véhicule
-        $('#immatriculation').on('select2:select', function(e) {
-            var immatriculation = e.params.data.id;
-            if (immatriculation) {
-                fetch(`/vehicules/get-info/${immatriculation}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            $('#marque').val(data.vehicule.marque);
-                            $('#modele').val(data.vehicule.modele);
-                        } else {
-                            $('#marque').val('');
-                            $('#modele').val('');
-                        }
-                    })
-                    .catch(error => console.error('Erreur lors de la récupération des informations du véhicule:', error));
-            }
-        });
-
-    function validateDateAffectation(input) {
-        const currentYear = new Date().getFullYear();
-        const dateValue = new Date(input.value);
-        const feedbackElement = document.getElementById('dateAffectationFeedback');
-
-        if (dateValue.getFullYear() !== currentYear) {
-            input.classList.add('border-crimson');
-            input.classList.remove('border-green-500');
-            feedbackElement.style.display = 'block';
-            return false;
-        } else {
-            input.classList.remove('border-crimson');
-            input.classList.add('border-green-500');
-            feedbackElement.style.display = 'none';
-            return true;
+    // Gérer la sélection d'un numéro d'immatriculation de véhicule
+    $('#immatriculation').on('select2:select', function(e) {
+        var immatriculation = e.params.data.id;
+        if (immatriculation) {
+            fetch(`/vehicules/get-info/${immatriculation}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        $('#marque').val(data.vehicule.marque);
+                        $('#modele').val(data.vehicule.modele);
+                    } else {
+                        $('#marque').val('');
+                        $('#modele').val('');
+                    }
+                })
+                .catch(error => console.error('Erreur lors de la récupération des informations du véhicule:', error));
         }
-    }
-
+    });
 
     // Logique de pagination
     const pages = document.querySelectorAll(".page");

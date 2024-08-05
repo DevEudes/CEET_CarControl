@@ -32,7 +32,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Chauffeur $chauffeur
  * @property Vehicule $vehicule
  * @property Collection|AppBonCarburant[] $app_bon_carburants
- * @property Collection|AppBonSortie[] $app_bon_sorties
+ * @property Collection|AppBonsortie[] $app_bon_sorties
  * @property Collection|AppCarteCarburant[] $app_carte_carburants
  *
  * @package App\Models
@@ -81,7 +81,7 @@ class Approvisionnement extends Model
 
 	public function app_bon_sorties()
 	{
-		return $this->hasMany(AppBonSortie::class, 'id_approvisionnement');
+		return $this->hasMany(AppBonsortie::class, 'id_approvisionnement');
 	}
 
 	public function app_carte_carburants()

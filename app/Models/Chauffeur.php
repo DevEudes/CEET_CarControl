@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $nom
  * @property string $prenom
  * @property int $contact
- * @property string $disponibilite
+ * @property bool $disponibilite
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
@@ -39,6 +39,7 @@ class Chauffeur extends Model
 
 	protected $casts = [
 		'contact' => 'int',
+		'disponibilite' => 'bool',
 		'created_by' => 'int',
 		'updated_by' => 'int'
 	];

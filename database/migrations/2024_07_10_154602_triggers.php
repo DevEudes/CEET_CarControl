@@ -29,7 +29,7 @@ return new class extends Migration
             BEGIN
                 IF NEW.etat_fiche = "termine" AND NOW() > NEW.date_heure_retour THEN
                     UPDATE vehicules 
-                    SET etat_vehicule = "bon_etat"
+                    SET etat_vehicule = "bon etat"
                     WHERE id = NEW.id_vehicule;
                 END IF;
             END
@@ -42,7 +42,7 @@ return new class extends Migration
             FOR EACH ROW
             BEGIN
                 UPDATE vehicules 
-                SET etat_vehicule = "en_maintenance"
+                SET etat_vehicule = "en maintenance"
                 WHERE id = NEW.id_vehicule;
             END
         ');
@@ -54,7 +54,7 @@ return new class extends Migration
             BEGIN
                 IF NEW.etat_fiche = "termine" AND NOW() > NEW.date_heure_sortie THEN
                     UPDATE vehicules 
-                    SET etat_vehicule = "bon_etat"
+                    SET etat_vehicule = "bon etat"
                     WHERE id = NEW.id_vehicule;
                 END IF;
             END
@@ -67,7 +67,7 @@ return new class extends Migration
             FOR EACH ROW
             BEGIN
                 UPDATE vehicules 
-                SET etat_vehicule = "bon_etat"
+                SET etat_vehicule = "bon etat"
                 WHERE id = NEW.id_vehicule;
             END
         ');

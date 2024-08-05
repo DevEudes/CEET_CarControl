@@ -22096,7 +22096,7 @@ code {
 }
 
 .card.card-tale {
-  background-color: #fafb0c;
+  background-color: #5ac85a;
   color: #000;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -22106,7 +22106,7 @@ code {
 } */
 
 .card.card-dark-blue {
-  background-color: #f6e472;
+  background-color: #ef1212;
   color: #000;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -22126,20 +22126,12 @@ code {
 } */
 
 .card.card-light-danger {
-  background-color: #ef1212;
+  background-color: #f6e472;
   color: #000;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.card.card-light-red {
-  background-color: #ef1212;
-  color: #000;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
 
-/* .card.card-light-danger:hover {
-  background: #f59095;
-} */
 
 .card-inverse-primary {
   background: rgba(75, 73, 172, 0.2);

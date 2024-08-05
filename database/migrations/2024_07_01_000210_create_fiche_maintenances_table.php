@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('inspection_reception');
             $table->string('inspection_livraison');
             $table->string('travaux_execute');
-            $table->enum('etat_fiche', ['en_cours', 'termine']);
+            $table->enum('etat_fiche', ['en cours', 'termine']);
             $table->foreignId('id_chauffeur')->constrained(table :'chauffeurs');
             $table->foreignId('id_vehicule')->constrained(table :'vehicules');
             $table->foreignId('id_mecanicien')->constrained(table :'mecaniciens');

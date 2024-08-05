@@ -55,29 +55,40 @@
                     autocomplete="immatriculation" 
                     minlength="7" 
                     maxlength="8" 
-                    pattern="\d{4} (?!TG)([A-Z]{2}|[A-Z]/[A-Z])" 
-                    title="Le format doit être de 4 chiffres suivis d'un espace puis de deux lettres majuscules ou d'une lettre majuscule suivie de '/' et une lettre" 
-                    oninput="validateImmatriculation(this)"
+                    
+                    onblur="formatImmatriculation(this)"
                 />
                 <x-input-error :messages="$errors->get('immatriculation')" class="mt-2" style="color: red" />
                 <small id="immatriculationFeedback" class="text-crimson" style="display:none;">Le format est invalide. Ex: 1234 AB</small>
             </div>
             <div class="mt-4">
-                <x-input-label for="marque" :value="__('Marque')" />
-                <x-text-input id="marque" placeholder="marque" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" type="text" name="marque" :value="old('marque')" required autocomplete="marque" />
-                <x-input-error :messages="$errors->get('marque')" class="mt-2" style="color: red"/>
-            </div>
-            <div class="mt-4">
-                <x-input-label for="modele" :value="__('Modèle')" />
-                <x-text-input id="modele" placeholder="modèle" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" type="text" name="modele" :value="old('modele')" required autocomplete="modele" />
-                <x-input-error :messages="$errors->get('modele')" class="mt-2" style="color: red"/>
-            </div>
-            <div class="mt-4">
-                <x-input-label for="id_genre_vehicule" :value="__('Genre de véhicule')" />
-                <select id="id_genre_vehicule" name="id_genre_vehicule" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson select2" required>
-                    <option value="" class="bg-merino text-gray-500">
-                        {{ __("Sélectionner le genre de véhicule") }}
+                <x-input-label for="id_marque" :value="__('Marque du véhicule')" /><br>
+                <select id="id_marque" name="id_marque" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson select2" required>
+                    <option value="" class="bg-merino text-gray-500"></option>
+                    @foreach ($marques as $marque)
+                    <option value="{{ $marque->id }}" class="bg-merino text-gray-900">
+                        {{ $marque->nom }}
                     </option>
+                    @endforeach
+                </select>
+                <x-input-error :messages="$errors->get('id_marque')" class="mt-2" style="color: red"/>
+            </div>
+            <div class="mt-4">
+                <x-input-label for="id_modele" :value="__('Modèle du véhicule')" /><br>
+                <select id="id_modele" name="id_modele" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson select2" required>
+                    <option value="" class="bg-merino text-gray-500"></option>
+                    @foreach ($modeles as $modele)
+                    <option value="{{ $modele->id }}" class="bg-merino text-gray-900">
+                        {{ $modele->nom }}
+                    </option>
+                    @endforeach
+                </select>
+                <x-input-error :messages="$errors->get('id_modele')" class="mt-2" style="color: red"/>
+            </div>
+            <div class="mt-4">
+                <x-input-label for="id_genre_vehicule" :value="__('Genre de véhicule')" /><br>
+                <select id="id_genre_vehicule" name="id_genre_vehicule" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson select2" required>
+                    <option value="" class="bg-merino text-gray-500"></option>
                     @foreach ($genres as $genre)
                     <option value="{{ $genre->id }}" class="bg-merino text-gray-900">
                         {{ $genre->nom }}
@@ -112,6 +123,18 @@
                 <x-text-input id="kilometrage" placeholder="kilométrage" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" type="number" name="kilometrage" :value="old('kilometrage')" required autocomplete="kilometrage" />
                 <x-input-error :messages="$errors->get('kilometrage')" class="mt-2" style="color: red"/>
             </div>
+            <div class="mt-4">
+                <x-input-label for="type_moteur" :value="__('Type de moteur du véhicule')" /><br>
+                <select id="type_moteur" name="type_moteur" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson select2" required>
+                    <option value="" class="bg-merino text-gray-500">{{ __('Sélectionner le type de moteur') }}</option>
+                    @foreach ($types_moteur as $value => $label)
+                    <option value="{{ $value }}" class="bg-merino text-gray-900" {{ old('type_moteur') == $value ? 'selected' : '' }}>
+                        {{ $label }}
+                    </option>
+                    @endforeach
+                </select>
+                <x-input-error :messages="$errors->get('type_moteur')" class="mt-2" style="color: red"/>
+            </div>
             <button type="button" class="prev bg-gray-500 text-white rounded-md px-4 py-2 mt-4" style="
                     border-radius: 20px;
                     background-color: #479fcb;
@@ -136,7 +159,8 @@
                     id="date_achat" 
                     placeholder="date d'achat" 
                     class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson" 
-                    type="date" 
+                    type="date"
+                    max="{{ date('Y-m-d') }}" 
                     name="date_achat" 
                     :value="old('date_achat')" 
                     required 
@@ -144,7 +168,6 @@
                     oninput="validateDateAchat(this)"
                 />
                 <x-input-error :messages="$errors->get('date_achat')" class="mt-2" style="color: red"/>
-                <small id="dateAchatFeedback" class="text-crimson" style="display:none;">La date doit être dans l'année courante.</small>
             </div>
             <div class="mt-4">
                 <x-input-label for="liste_outillage" :value="__('Liste d\'outillage')" />
@@ -157,9 +180,7 @@
             <div class="mt-4">
                 <x-input-label for="id_fournisseur" :value="__('Fournisseur')" />
                 <select id="id_fournisseur" name="id_fournisseur" class="block mt-1 w-full bg-merino text-gray-900 border border-crimson rounded-md focus:border-crimson focus:ring-crimson select2" required>
-                    <option value="" class="bg-merino text-gray-500">
-                        {{ __("Sélectionner le fournisseur") }}
-                    </option>
+                    <option value="" class="bg-merino text-gray-500"></option>
                     @foreach ($fournisseurs as $fournisseur)
                     <option value="{{ $fournisseur->id }}" class="bg-merino text-gray-900">
                         {{ $fournisseur->nom }}
@@ -318,7 +339,7 @@
 
     .select2-container--default .select2-selection--single {
         height: 38px;
-        width: 200px !important;
+        width: 600px !important;
         padding: 5px;
         border-color: #ddd;
         border-radius: 4px;
@@ -377,13 +398,6 @@
                     input.classList.remove('border-crimson'); // Enlever la bordure rouge des champs valides
                 }
 
-                // Pour les dates, effectuer des validations spécifiques
-                if (input.type === 'date' && input.id === 'date_achat') {
-                    if (!validateDateAchat(input)) {
-                        formValid = false;
-                    }
-                }
-
                 if (input.type === 'date' && input.id === 'validite_garantie') {
                     if (!validateValiditeGarantie(input)) {
                         formValid = false;
@@ -413,7 +427,7 @@
     });
 
     // Initialisation de Select2 avec des options personnalisées
-    $('#id_fournisseur, #id_genre_vehicule').select2({
+    $('#id_marque, #id_modele, #id_fournisseur, #id_genre_vehicule, #type_moteur').select2({
         placeholder: 'Sélectionner une option',
         allowClear: true,
         width: 'resolve'
@@ -421,7 +435,7 @@
 
     // Validation de l'immatriculation
     function validateImmatriculation(input) {
-        const pattern = /^\d{4} (?!TG)([A-Z]{2}|[A-Z]\/[A-Z])$/;
+        const pattern = /^\d{4} ([A-Z]{2}|[A-Z]\/[A-Z])$/;
         const feedback = document.getElementById('immatriculationFeedback');
 
         if (pattern.test(input.value)) {
@@ -435,25 +449,43 @@
         }
     }
 
-    // Validation de la date d'achat
-    function validateDateAchat(input) {
-        const currentYear = new Date().getFullYear();
-        const dateValue = new Date(input.value);
-        const feedbackElement = document.getElementById('dateAchatFeedback');
+    function validateImmatriculation(input) {
+        // Nouveau pattern pour valider le format TG-xxxx-YY
+        const pattern = /^TG-\d{4}-[A-Z]{2}$/;
+        const feedback = document.getElementById('immatriculationFeedback');
 
-        // Vérifie si la date d'achat est dans l'année courante
-        if (dateValue.getFullYear() !== currentYear) {
-            input.classList.add('border-crimson');
-            input.classList.remove('border-green-500');
-            feedbackElement.style.display = 'block';
-            return false;
-        } else {
+        if (pattern.test(input.value)) {
             input.classList.remove('border-crimson');
             input.classList.add('border-green-500');
-            feedbackElement.style.display = 'none';
-            return true;
+            feedback.style.display = 'none';
+        } else {
+            input.classList.add('border-crimson');
+            input.classList.remove('border-green-500');
+            feedback.style.display = 'block';
         }
     }
+
+    function formatImmatriculation(input) {
+        // Valider et formater si nécessaire
+        const initialPattern = /^\d{4} ([A-Z]{2}|[A-Z]\/[A-Z])$/;
+        if (initialPattern.test(input.value)) {
+            // Appliquer le formatage
+            const parts = input.value.split(' ');
+            input.value = `TG-${parts[0]}-${parts[1]}`;
+        }
+
+        // Valider après formatage
+        validateImmatriculation(input);
+    }
+
+    document.getElementById('immatriculation').addEventListener('input', function() {
+        validateImmatriculation(this);
+    });
+
+    document.getElementById('immatriculation').addEventListener('blur', function() {
+        formatImmatriculation(this);
+    });
+
 
     // Validation de la validité de la garantie
     function validateValiditeGarantie(input) {
